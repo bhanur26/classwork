@@ -1,0 +1,25 @@
+package com.pack;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="table2")
+public class Address {
+	
+	private int addressid;
+	private String place;
+	public int getAddressid() {
+		return addressid;
+	}
+	public void setAddressid(int addressid) {
+		this.addressid = addressid;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+}

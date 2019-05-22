@@ -1,0 +1,16 @@
+package com.pack.service;
+
+import com.pack.Dao.CustomerDaoImpl;
+import com.pack.model.Customer;
+
+public class CustomerServiceImpl implements CustomerService {
+
+	public int insertCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		
+		int i=new CustomerDaoImpl().insertCustomer(c);
+		
+		return i;
+	}
+			
+}

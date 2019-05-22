@@ -1,0 +1,52 @@
+package com.pack;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import com.pack.model.Customer;
+import com.pack.service.CustomerServiceImpl;
+
+public class Main {
+	
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("########BANKING APPLICATION########");
+		System.out.println("1.Add Customer");
+		System.out.println("2.Update Customer");
+		System.out.println("3.Delete Customer");
+		System.out.println("4.Fetch Customer");
+		System.out.println("5.Exit");
+		float salary;
+		String name,address;
+		int ch,age,num;
+		do
+		{
+		System.out.println("Enter your choice");
+		ch=Integer.parseInt(sc.nextLine());
+		switch(ch)
+		{
+		case 1:  System.out.println("Enter name");
+				 name=sc.nextLine();
+				 System.out.println("Enter address");
+				 address=sc.nextLine();
+				 System.out.println("Enter age");
+				 age=Integer.parseInt(sc.nextLine());
+				 System.out.println("Enter Salary");
+				 salary=Float.parseFloat(sc.nextLine());
+				 Random r=new Random();
+				 num=r.nextInt(900000)+100000;
+				 Customer c=new Customer(num,name,address,age,salary);
+				 int  i=new CustomerServiceImpl().insertCustomer(c);
+				 if(i==1)
+					 System.out.println("Customer added successfully");
+				 break;
+		case 2:
+		case 3:
+		case 4:
+		case 5: System.exit(0);	
+		}
+		}while(ch<6);
+	}
+}
+
+	

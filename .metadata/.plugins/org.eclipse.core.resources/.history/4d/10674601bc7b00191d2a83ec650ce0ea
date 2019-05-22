@@ -1,0 +1,109 @@
+package com.pack.Dao;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.pack.HibernateUtil;
+import com.pack.model.Customer;
+
+public class CustomerDaoImpl implements CustomerDao {
+
+	public void insertCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		Session s=HibernateUtil.getSessionFactory().openSession();
+		Transaction t=null;
+		try {
+			t=s.beginTransaction();
+			s.save(c);
+			t.commit();
+		}
+		catch(HibernateException e) {
+			t.rollback();
+			e.printStackTrace();
+			
+		}
+		finally {
+			s.close();
+		}
+	}
+
+	public void updateCustomer(Customer c1) {
+        Session s=HibernateUtil.getSessionFactory().openSession();
+        Transaction t=null;
+        try 
+        {
+            t=s.beginTransaction();
+            Customer c=(Customer)s.get(Customer.class, c1.getCustid());
+            if(c!=null) 
+            {
+                 c.setAddress(c1.getAddress());
+                 c.setAge(c1.getAge());
+                 c.setSalary(c1.getSalary());
+                 s.update(c);
+            }
+            else 
+            {
+                 System.out.println("no customer found");
+            }
+            t.commit();
+            
+        }
+        catch (HibernateException e) {
+            // TODO: handle exception
+            System.out.println("=-=>"+e);
+            t.rollback();
+            e.printStackTrace();
+        }
+        finally {
+            s.close();
+        }
+
+	}
+	public void deleteCustomer(int num) {
+		// TODO Auto-generated method stub
+		Session s=HibernateUtil.getSessionFactory().openSession();
+		Transaction t=null;
+		try {
+			t=s.beginTransaction();
+			Customer c1=(Customer)s.get(Customer.class,num);
+			if(c1!=null) {
+				s.delete(c1);
+			}
+			t.commit();
+		}
+		catch(HibernateException e) {
+			t.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			s.close();
+		}
+	}
+
+	public void fetchCustomerById(int num) {
+		// TODO Auto-generated method stub
+		Session s=HibernateUtil.getSessionFactory().openSession();
+		Transaction t=null;
+		try {
+			t=s.beginTransaction();
+            Customer c1=(Customer)s.load(Customer.class, num);
+            t.commit();
+		}
+		catch(HibernateException e) {
+			t.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			s.close();
+		}
+		
+		
+	}
+
+	
+
+	
+	
+
+}

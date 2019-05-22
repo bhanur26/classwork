@@ -1,0 +1,12 @@
+package com.pack.Service;
+
+import com.pack.model.User;
+
+public class UserServiceImpl implements UserService {
+	
+	public void add(User user)
+	{
+		System.out.println("User added succesfully");
+	}
+
+}

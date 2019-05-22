@@ -1,0 +1,71 @@
+package com.pack;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import com.pack.model.Customer;
+import com.pack.service.CustomerServiceImpl;
+
+public class Main {
+	
+	public static void main(String args[]) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("########BANKING APPLICATION########");
+		System.out.println("1.Add Customer");
+		System.out.println("2.Update Customer");
+		System.out.println("3.Delete Customer");
+		System.out.println("4.Fetch Customer");
+		System.out.println("5.Exit");
+		float salary;
+		String name,address;
+		int ch,age,num;
+		do
+		{
+		System.out.println("Enter your choice");
+		ch=Integer.parseInt(sc.nextLine());
+		switch(ch)
+		{
+		case 1:  System.out.println("Enter name");
+				 name=sc.nextLine();
+				 System.out.println("Enter address");
+				 address=sc.nextLine();
+				 System.out.println("Enter age");
+				 age=Integer.parseInt(sc.nextLine());
+				 System.out.println("Enter Salary");
+				 salary=Float.parseFloat(sc.nextLine());
+				 Random r=new Random();
+				 num=r.nextInt(900000)+100000;
+				 Customer c=new Customer(num,name,address,age,salary);
+				new CustomerServiceImpl().insertCustomer(c);
+			    System.out.println("Customer added successfully");
+		case 2:System.out.println("Enter id");
+		 num=Integer.parseInt(sc.nextLine());
+		 System.out.println("Enter address");
+		 address=sc.nextLine();
+		 System.out.println("Enter age");
+		 age=Integer.parseInt(sc.nextLine());
+		 System.out.println("Enter Salary");
+		 salary=Float.parseFloat(sc.nextLine());
+		 Customer c1=new Customer(num,address,age,salary);
+		 new CustomerServiceImpl().updateCustomer(c1);
+		 System.out.println("updated successfully");
+	    System.out.println("Customer added successfully");
+	    break;
+		case 3:System.out.println("Enter id");
+		 num=Integer.parseInt(sc.nextLine());
+		 new CustomerServiceImpl().deleteCustomer(num);
+		 System.out.println("updated successfully");
+	    System.out.println("Customer added successfully");
+	    break;
+		case 4:System.out.println("Enter id");
+		 num=Integer.parseInt(sc.nextLine());
+		 Customer c2=new CustomerServiceImpl().fetchCustomerById(num);
+		 System.out.format("%-15s %-20s %-20s %-5s %-10s\n","Customer Id","Name","Address","Age","Salary");
+		 System.out.format("%-15s %-20s %-20s %-5s %-10s\n",c2.getCustId(),c2.getName(),c2.getAddress(),c2.getAge(),c2.getSalary());
+		case 5: System.exit(0);	
+		}
+		}while(ch<6);
+	}
+}
+
+	

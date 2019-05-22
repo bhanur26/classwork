@@ -1,0 +1,31 @@
+package com.pack.Dao;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.pack.HibernateUtil;
+import com.pack.model.Customer;
+
+public class CustomerDaoImpl implements CustomerDao {
+
+	public void insertCustomer(Customer c) {
+		// TODO Auto-generated method stub
+		Session s=HibernateUtil.getSessionFactory.openSession();
+		Transaction t=null;
+		try {
+			t=s.beginTransaction();
+			s.save(c);
+			t.commit();
+		}
+		catch(HibernateException e) {
+			t.rollback();
+			e.printStackTrace();
+			
+		}
+		finally {
+			s.close();
+		}
+	}
+
+}
