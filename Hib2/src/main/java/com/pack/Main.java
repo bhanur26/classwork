@@ -1,5 +1,6 @@
 package com.pack;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -58,11 +59,18 @@ public class Main {
 		 System.out.println("updated successfully");
 	    System.out.println("Customer added successfully");
 	    break;
-		case 4:System.out.println("Enter id");
-		 num=Integer.parseInt(sc.nextLine());
-		 Customer c2=new CustomerServiceImpl().fetchCustomerById(num);
+		case 4:
+//	    System.out.println("Enter id");
+//		 num=Integer.parseInt(sc.nextLine());
+		 //Customer c2=new CustomerServiceImpl().fetchCustomerById(num);
+		
+		 //System.out.format("%-15s %-20s %-20s %-5s %-10s\n",c2.getCustid(),c2.getName(),c2.getAddress(),c2.getAge(),c2.getSalary());
+		 
 		 System.out.format("%-15s %-20s %-20s %-5s %-10s\n","Customer Id","Name","Address","Age","Salary");
-		 System.out.format("%-15s %-20s %-20s %-5s %-10s\n",c2.getCustid(),c2.getName(),c2.getAddress(),c2.getAge(),c2.getSalary());
+		 List<Customer> l1=new CustomerServiceImpl().fetchCustomerById();
+		 for(Customer b:l1) {
+			 System.out.format("%-15s %-20s %-20s %-5s %-10s\n",b.getCustid(),b.getName(),b.getAddress(),b.getAge(),b.getSalary()); 
+		 }
 		case 5: System.exit(0);	
 		}
 		}while(ch<6);

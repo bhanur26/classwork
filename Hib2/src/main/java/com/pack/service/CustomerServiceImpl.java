@@ -1,5 +1,7 @@
 package com.pack.service;
 
+import java.util.List;
+
 import com.pack.Dao.CustomerDaoImpl;
 import com.pack.model.Customer;
 
@@ -21,9 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 		new CustomerDaoImpl().deleteCustomer(num);
 	}
 
-	public Customer fetchCustomerById(int num) {
+	public /*Customer*/List<Customer> fetchCustomerById() {
 		// TODO Auto-generated method stub
-		return new CustomerDaoImpl().fetchCustomerById(num);
+		return new CustomerDaoImpl().fetchCustomerById();
 	}
 	
 			

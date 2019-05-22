@@ -2,6 +2,8 @@ package com.pack.Dao;
 
 
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -54,10 +56,11 @@ public class CustomerDaoImpl implements CustomerDao {
             
             //using hql methods
             
-            String query="Update Customer c set c.address=:add,c.salary=:sal where c.custid=:cid";
+            String query="Update Customer c set c.address=:add,c.salary=:sal,c.age=:age where c.custid=:cid";
             Query q=s.createQuery(query);
             q.setParameter("cid",c1.getCustid());
             q.setParameter("add",c1.getAddress());
+            q.setParameter("age",c1.getAge());
             q.setParameter("sal",c1.getSalary());
             i=q.executeUpdate();
             
@@ -100,14 +103,19 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 	}
 
-	public Customer fetchCustomerById(int num) {
+	public /*Customer*/List<Customer> fetchCustomerById() {
+		
 		// TODO Auto-generated method stub
+		List<Customer> list=null;
 		Session s=HibernateUtil.getSessionFactory().openSession();
 		Transaction t=null;
 		Customer c1=null;
 		try {
 			t=s.beginTransaction();
-            c1=(Customer)s.get(Customer.class, num);
+//            c1=(Customer)s.get(Customer.class, num);
+			String hql="from Customer";
+			Query query=s.createQuery(hql);
+			list=query.list();
             t.commit();
 		}
 		catch(HibernateException e) {
@@ -117,7 +125,9 @@ public class CustomerDaoImpl implements CustomerDao {
 		finally {
 			s.close();
 		}
-		return c1;
+		
+		
+		return list;
 		
 	}
 
