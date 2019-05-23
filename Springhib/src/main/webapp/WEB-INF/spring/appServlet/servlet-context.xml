@@ -15,7 +15,7 @@
 <resources mapping="/resources/**" location="/resources/"/>
 
 <beans:bean id="propertyConfigurer"
-	class="org.springFramework.beans.factory.config.PropertyPlaceholderConfigurer"
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 	p:location="/WEB-INF/jdbc.properties"/>
 	
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -27,11 +27,11 @@
 	</beans:bean>
 	
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<beans:property name="basename"/>		
+		<beans:property name="basename" value="WEB-INF/messages"/>		
 	</beans:bean>
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	<bean:property name="prrefix" value="?WEB-INF/views/"/>
+	<beans:property name="prefix" value="/WEB-INF/views/"/>
 	<beans:property name="suffix" value=".jsp"/>
 	</beans:bean>
 </beans:beans>
