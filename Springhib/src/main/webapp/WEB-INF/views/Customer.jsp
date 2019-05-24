@@ -44,6 +44,17 @@
   }
 
        </style>
+       
+ <script type="text/javascript">
+ function deleteCustomer(customerId) {
+	 
+	 if(confirm('Do you want to delete this Customer?')){
+		 
+		 var url='delete/'+customerId;
+		 window.location.href=url;
+	 }	
+}
+ </script>
 
 </head>
 <body>
@@ -134,6 +145,31 @@
 
 </form:form>
 
+<h3>List of Customer</h3>
+<c:if test="${!empty customerList }">
+     <table class="customerTable">
+     <tr>
+     	<th width="180">Customer Name</th>
+     	<th width="160">Address</th>
+     	<th width="60">Age</th>
+     	<th width="80">Salary</th>
+     	<th width="60">Action</th>
+     </tr>
+     <c:forEach items="${customerList }" var="customer">
+     <tr>
+     		<td><a href="<c:url value='/edit/${customer.id }' />" >${customer.name}</a></td>
+     		<td>${customer.address}</td>
+     		<td>${customer.age}</td>
+     		<td>${customer.salary}</td>
+     		<td><img src="<c:url value='/images/vcard_delete.png' />" title="Delete Customer" onclick="javascript:deleteCustomer(${customer.id})"/> 
+     		<a href="<c:url value='/edit/${customer.id }' />" >
+     		 <img src="<c:url value='/images/vcard_edit.png' />" title="Edit Customer"/>
+     		 </a>
+     		 </td>
+     </tr>
+     </c:forEach>
+     </table>
+</c:if>
 
 
 </body>

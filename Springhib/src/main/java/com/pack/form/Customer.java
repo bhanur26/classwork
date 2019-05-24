@@ -1,11 +1,39 @@
 package com.pack.form;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name="CUSTOMER",schema="bank1")
 public class Customer {
 			
+	@Id
+	@Column(name="ID")
 	private Integer id;
+	
+	@NotEmpty
+	@Column(name="NAME")
+	@Size(min=2, max=30)
 	private String name;
+	
+	@Size(min=2, max=30)
+	@Column(name="Address")
 	private String address;
+	
+	@Column(name="AGE")
+	@NotNull @Min(18) @Max(100)
 	private Integer age;
+	
+	@NotNull
+	@Column(name="SALARY")
 	private Double salary;
 	
 	public Customer() {
